@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /ev2_backend_szabo_tomas/
+RewriteBase /Eval_U2A_szaboTomasverenaGrecia/
 
 # If the requested file or directory exists, serve it directly
 RewriteCond %{REQUEST_FILENAME} !-f

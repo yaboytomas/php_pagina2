@@ -9,13 +9,15 @@
 	require_once "controllers/categoria_servicio.php";
 	require_once "controllers/pregunta_frecuente.php";
 	require_once "controllers/info_contacto.php";
-	
+	require_once "controllers/historia.php";
+	require_once "controllers/equipo.php";
+
 	//Function que dependera de que solicitud..
 	$method = $_SERVER["REQUEST_METHOD"];
 	
 	//extraccion del URL - simplified version
 	$url = $_SERVER['REQUEST_URI'];
-	$basePath = '/ev2_backend_szabo_tomas/';
+	$basePath = '/Eval_U2A_szaboTomasverenaGrecia/';
 	$url = str_replace($basePath, '', $url);
 	$urlParts = explode('/', $url);
 	$resource = $urlParts[0];
@@ -38,6 +40,13 @@
 			handleMantenimientoRequests($method);
 			break;
 
+		case "historia":
+			handleHistoriaRequests($method);
+			break;
+
+		case "equipo":
+			handleEquipoRequests($method);
+			break;
 		default:
 			http_response_code(405);
 			echo json_encode(["Status" => "Error", "Message" => "Metodo no permitido"]);
@@ -140,4 +149,53 @@
 					break;
 			}
 					}
+
+	function handleHistoriaRequests($method) {
+		switch ($method) {
+			case "GET":
+				getHistoria();
+				break;
+			case "POST":
+				addHistoria();
+				break;
+			case "PUT":
+				updateHistoria();
+				break;
+			case "PATCH":
+				patchHistoria();
+				break;
+			case "DELETE":
+				deleteHistoria();
+				break;
+			default:
+				http_response_code(405);
+				echo json_encode(["Status" => "Error", "Message" => "Metodo no permitido"]);
+				break;
+		}
+	}
+
+	function handleEquipoRequests($method) {
+		switch ($method) {
+			case "GET":
+				getEquipo();
+				break;
+			case "POST":
+				addEquipo();
+				break;
+			case "PUT":
+				updateEquipo();
+				break;
+			case "PATCH":
+				patchEquipo();
+				break;
+			case "DELETE":
+				deleteEquipo();
+				break;
+			default:
+				http_response_code(405);
+				echo json_encode(["Status" => "Error", "Message" => "Metodo no permitido"]);
+				break;	
+		}
+	}
+
 ?>
